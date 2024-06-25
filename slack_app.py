@@ -33,10 +33,12 @@ prompt = PromptTemplate(
 )
 
 agent_chain = LLMChain(
-    llm=ChatCohere(temperature=0), 
-    prompt=prompt, 
-    verbose=True, 
-    memory=ConversationBufferWindowMemory(k=2),
+    llm=ChatCohere(cohere_api_key=os.environ.get("cohere_api_key"),
+                model = 'command-r-plus' , 
+                temperature=0),
+                prompt=prompt, 
+                verbose=True, 
+                memory=ConversationBufferWindowMemory(k=2),
 )
 
 # llm = ChatCohere(cohere_api_key=os.environ.get("cohere_api_key"),
