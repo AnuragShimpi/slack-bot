@@ -40,9 +40,9 @@ class QueryRequest(BaseModel):
 async def search_query(query_request: QueryRequest):
     query = query_request.query
 
-    os.environ['cohere_api_key'] = "PKYJ9mWpadwNW8Oj44ftpOr6rKzBkzW6eT2iZhaC"
-    os.environ['OPENWEATHERMAP_API_KEY'] = "ccb2a2627f1646603dbc9721e03990dc"
-    os.environ['serpapi_api_key'] = "73ce724cbce1469407bd4191a7b7c54aba5366019305d9f0f05f61791404f023"
+    os.environ['cohere_api_key'] = "<cohere-api-key>"
+    os.environ['OPENWEATHERMAP_API_KEY'] = "<openweather-api-key>"
+    os.environ['serpapi_api_key'] = "<serp-api-key>"
 
     custom_prompt = (
     "You are a knowledgeable assistant. When asked about any topic, provide a detailed and comprehensive response. "
@@ -65,6 +65,10 @@ async def search_query(query_request: QueryRequest):
     result = agent_chain.run(query)
     return {"result": result}
 
+def main():
+    port = 8000
+    print(f"Server running at: http://127.0.0.1:{port}")
+    uvicorn.run(app, host="0.0.0.0", port=port)
+
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    main()
